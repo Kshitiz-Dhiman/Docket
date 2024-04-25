@@ -1,10 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Cards from "./Cards";
 import { IoMdAdd } from "react-icons/io";
 
 function Foreground() {
   const ref = useRef(null);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(() => {
+    const localData = localStorage.getItem('data');
+    return localData ? JSON.parse(localData) : [];
+  });
   const array = [
     "blue",
     "red",
@@ -12,7 +15,7 @@ function Foreground() {
     "yellow",
     "slate",
   ]
-
+    
   const randomColor = () => {
     return array[Math.floor(Math.random() * array.length)];
   }
@@ -22,16 +25,23 @@ function Foreground() {
     if (document.querySelector(".desc-input").value === "") {
       return;
     }
-    setData([
+    const newData = [
       ...data,
       {
         desc: document.querySelector(".desc-input").value,
         tag: { tagTitle: "Open", tagColor: color },
       },
-    ]);
+    ];
+    setData(newData);
+    localStorage.setItem('data', JSON.stringify(newData));
     document.querySelector(".desc-input").value = "";
     document.getElementById("modal").close();
   };
+
+  // Save to local storage whenever data changes
+  useEffect(() => {
+    localStorage.setItem('data', JSON.stringify(data));
+  }, [data]);
 
   return (
     <div

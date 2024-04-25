@@ -3,6 +3,17 @@ import { FaRegFileAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 function Cards({ data, reference, unique }) {
+  const downloadFile = () => {
+    const element = document.createElement("a");
+    const file = new Blob([data.desc], {
+      type: "text/plain",
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = "myFile.txt";
+    document.body.appendChild(element);
+    element.click();
+  };
+
   return (
     <motion.div
       drag
@@ -37,6 +48,9 @@ function Cards({ data, reference, unique }) {
                   <form method="dialog">
                     <button className="btn">Close</button>
                   </form>
+                  <button className="btn" onClick={downloadFile}>
+                    Downlaod(.txt file)
+                  </button>
                 </div>
               </div>
             </dialog>
