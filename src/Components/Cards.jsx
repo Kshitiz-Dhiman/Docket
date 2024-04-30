@@ -17,6 +17,7 @@ function Cards({ data, reference, unique }) {
 
   return (
     <motion.div
+      drag
       whileTap={{ scale: 1 }}
       whileHover={{ scale: 1.05 }}
       whileDrag={{ scale: 1.12  }}

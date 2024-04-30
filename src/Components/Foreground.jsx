@@ -46,7 +46,7 @@ function Foreground() {
       </Sidebar>
       <div className="mx-40">
         <nav className="p-5">
-          <input type="text" className="input bg-white text-black active:outline-none" placeholder="Search" />
+          <input type="text" className="input nav-search bg-white text-black text-[1.2rem] active:outline-none" placeholder="Search" />
         </nav>
         <div>
           <h2 className=" text-black text-[62px] font-[700] leading-[62px] p-10">
