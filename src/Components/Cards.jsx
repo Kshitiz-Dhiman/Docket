@@ -1,7 +1,8 @@
 import React from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
-
+import { FaBookOpen } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 function Cards({ data, reference, unique }) {
   const downloadFile = () => {
     const element = document.createElement("a");
@@ -16,31 +17,34 @@ function Cards({ data, reference, unique }) {
 
   return (
     <motion.div
-      drag
-      whileTap={{ scale: 1.12 }}
-      whileDrag={{ scale: 1.12 }}
+      whileTap={{ scale: 1 }}
+      whileHover={{ scale: 1.05 }}
+      whileDrag={{ scale: 1.12  }}
       dragConstraints={reference}
       dragElastic={0.01}
       dragMomentum={false}
       dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
-      className="relative w-60 h-72 rounded-[16px] bg-zinc-900/50 text-[#F0F8FF] p-[30px] overflow-hidden"
+      className={`relative w-[310px] h-[320px] rounded-[25px] bg-[#${data.tag.tagColor}] text-black p-[30px] overflow-hidden`}
     >
       <FaRegFileAlt className="text-xl" />
       <p className="mt-5 font-semibold">{data.desc}</p>
       <div className="absolute bottom-0 w-full left-0">
         <div
-          className={`tag w-full py-3  bg-${data.tag.tagColor}-600 flex  justify-center items-center`}
+          className={`tag w-full py-3 flex  justify-center items-center`}
         >
           <h3 className="text-sm font-bold ">
             <button
-              className={`btn btn-active bg-${data.tag.tagColor}-600 border-none`}
+              className={`btn btn-active border-none rounded-full`}
               onClick={() =>
                 document.getElementById(`my_modal_${unique}`).showModal()
               }
             >
-              Open
+              <FaBookOpen/>
             </button>
-            <dialog id={`my_modal_${unique}`} className="modal">
+            <button className="btn mx-2 rounded-full">
+              <MdEdit/>
+            </button>
+            <dialog id={`my_modal_${unique}`} className="modal text-white">
               <div className="modal-box">
                 <h3 className="font-bold text-lg">HALLO :D</h3>
                 <p className="py-4">{data.desc}</p>
